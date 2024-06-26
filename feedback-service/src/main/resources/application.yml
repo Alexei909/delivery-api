@@ -1,0 +1,24 @@
+server:
+  port: 8084
+spring:
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         issuer-uri: http://localhost:8100/realms/pizza
+  application:  
+    name: catalogue-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/reviews
+    username: postgres
+    password: qwerty123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+

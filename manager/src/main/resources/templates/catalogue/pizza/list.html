@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши пиццы</title>
+</head>
+<body>
+    <a data-th-href="@{/catalogue/pizza/create}">Создать пиццу</a>
+    <h1>Наши пиццы</h1>
+    <form method="get" data-th-action="@{/catalogue/pizza/list}">
+        <label>Поиск:
+            <input type="text" name="filter" data-th-value="${filter}">
+            <button type="submit">Поиск</button>
+        </label>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Пицца</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="p : ${pizza}">
+                <td>
+                    <strong data-th-text="${p.id}"></strong>
+                </td>
+                <td>
+                    <a data-th-href="@{/catalogue/pizza/{pizzaId} (pizzaId = ${p.id})}"
+                        data-th-text="${p.name}"></a>
+                </td>
+                <td>
+                    [[${p.price}]] Р
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

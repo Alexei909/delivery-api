@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[${pizza.name}]]</title>
+</head>
+<body>
+    <a data-th-href="@{/catalogue/pizza/list}">К списку пицц</a>
+    <h1 data-th-text="${pizza.name}"></h1>
+    <ul>
+        <li><strong>ID</strong>: <span data-th-text="${pizza.id}"></span></li>
+        <li><strong>Название</strong>: <span data-th-text="${pizza.name}"></span></li>
+        <li><strong>Состав</strong>: <span data-th-text="${pizza.composition}"></span></li>
+        <li><strong>Цена</strong>: <span data-th-text="${pizza.price}"></span> р</li>
+    </ul>
+    <a data-th-href="@{/catalogue/pizza/{pizzaId}/edit (pizzaId = ${pizza.id})}">Изменить</a>
+    <form method="post" data-th-action="@{/catalogue/pizza/{pizzaId}/delete (pizzaId = ${pizza.id})}">
+        <button type="submit">Удалить</button>
+    </form>
+</body>
+</html>

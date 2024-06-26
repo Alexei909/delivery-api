@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание</title>
+</head>
+<body>
+    <a data-th-href="@{/catalogue/pizza/list}">К списку пицц</a>
+    <h1>Новая Пицца</h1>
+    <div data-th-if="${errors}">
+        <h2>Допущены ошибки</h2>
+        <ul data-th-each="error : ${errors}">
+            <li data-th-text="${error}"></li>
+        </ul>
+    </div>
+    <form method="post" data-th-action="@{/catalogue/pizza/create}">
+        <label>
+            Название: <br>
+            <input type="text" name="name" data-th-value="${payload?.name}">
+        </label> <br>
+        <label>
+            Состав: <br>
+            <textarea name="composition" cols="30" rows="10"
+                data-th-text="${payload?.composition}"></textarea>
+        </label> <br>
+        <label>
+            Цена: <br>
+            <input type="number" name="price" data-th-value="${payload?.price}">
+        </label> <br>
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>

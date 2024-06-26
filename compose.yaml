@@ -1,0 +1,43 @@
+name: pizza
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.7
+    environment:
+      KEYCLOAK_ADMIN: admin 
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - '18082:8100'
+    command: start-dev --import-realm
+  catalogue-db:
+    image: postgres:16
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty123
+      POSTGRES_DB: catalogue
+  config-service:
+      build:
+        dockerfile: Dockerfile
+        args:
+          JAR_FILE: config-service/target/config-service-1.0-SNAPSHOT.jar
+        tags:
+          - localhost:5001/leha/config-service:latest
+      environment:
+        SPRING_PROFILE_ACTIVE: native
+        SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS: file:///config/{application}/{profile}
+      volumes:
+        - './config/cloud:/config'
+      ports:
+        - '19999:8888'
+  catalogue-service:
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: catalogue-service/target/catalogue-service-0.0.1-SNAPSHOT.jar
+      tags:
+        - localhost:5000/leha/catalogue-service:latest
+    environment:
+      SPRING_PROFILE_ACTIVE: cloudconfig
+    ports:
+      - '18888:8888'

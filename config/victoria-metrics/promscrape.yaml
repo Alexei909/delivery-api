@@ -1,0 +1,12 @@
+scrape_configs:
+  - job_name: catalogue-service
+    static_configs:
+      - targets: ["http://192.168.32.1:8080/actuator/prometheus"]
+    oauth2:
+      client_id: victoria-metrics
+      client_secret: PVvzM4FAkUxdbOtbhtGIk8EbA00psfj0
+      token_url: http://192.168.32.1:8100/realms/pizza/protocol/openid-connect/token
+      scopes:
+        - metrics
+      endpoint_params: 
+        grand_type: client_credentials

@@ -1,0 +1,9 @@
+
+spring:
+  application:  
+    name: catalogue-service
+  config:
+    import: 'optional:configserver:'
+  cloud:
+    config:
+      uri: http://config:config-password@192.168.0.104:19999/

@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://192.168.0.104:8100/realms/pizza
+  datasource:
+    url: jdbc:postgresql://catalogue-db:5432/catalogue
+    username: postgres
+    password: qwerty123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include:
+#           - health
+#           - prometheus
+
+eureka:
+  client:
+    service-url: 
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-id-address: true

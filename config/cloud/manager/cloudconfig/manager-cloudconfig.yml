@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://192.168.0.104:8100/realms/pizza
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: manager-app
+            client-secret: IHGYFMYjdYlg2iWsq6HXXkHePvLdYHo4
+            scope:
+              - openid
+              - view_catalogue
+              - edit_catalogue
+              - microprofile-jwt
+
+
+managerapp:
+  services:
+    catalogue:
+      uri: lb://catalogue-service
+      registration-id: keycloak
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
